@@ -1,2 +1,0 @@
-# PdcVipSolutions.github.io
-Introduction
