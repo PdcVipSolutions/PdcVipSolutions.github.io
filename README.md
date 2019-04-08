@@ -1,5 +1,7 @@
 Copyright (c) Prolog Developemnt Center SPb
+
 PdcVipSolutions
+
 Version 2.0
 
 The PdcVipSolutions v.2.0 - is the set of tools, examples and projects as the additions to PDC Visual Prolog official product.
