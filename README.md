@@ -7,11 +7,13 @@ Version 2.0
 The PdcVipSolutions v.2.0 - is the set of tools, examples and projects as the additions to PDC Visual Prolog official product.
 The current  version 2.0 is build by Vip version 901.
 
-All content must be placed to one directory with names
+All content must be placed to the directory structure with names
 SpbRSolutions (the root directory may have any other name)
-    SpbExamples
-    SpbProjects
-    SpbVipTools
+    SpbExamples (corresponds to SpbExamples in GitHub)
+    SpbProjects (must be created)
+        DelFiles (corresponds to DelFiles in GitHub)
+        WS_Manager  (corresponds to WS_Manager in GitHub)
+    SpbVipTools (corresponds to SpbVipTools in GitHub)
 
 The main purpose of version 2.0 is the demonstration of the WorkSpace Manager Tool.
 So SpbVipTools is the set of packages to support this project and  examples and to demonstrate how it works.
