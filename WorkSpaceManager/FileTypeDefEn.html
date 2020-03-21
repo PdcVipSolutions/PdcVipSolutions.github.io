@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>FileTypeDef</title></head>
+<body><small><small>Copyright (c) Prolog Developemnt Center SPb</small></small>
+<br><small><small>WorkSpace Manager&nbsp;<br>Version 2.0</small></small><br><h2>Identify file types and operations</h2>The
+set of operations for the selected file type is one of the most
+important properties that determine how to work with the application.<br>Setting file types and operations is done in the settings dialog in the<span style="font-weight: bold;"> File Type</span> tab, which is called by the <span style="font-weight: bold;">Options</span> button.<br><img style="width: 228px; height: 94px;" alt="" src="PicturesEn/OptionsButton.PNG"><br>The properties set in the form of the <span style="font-weight: bold;">Options</span> button are set for each operation of all files of this type.<br><br><img style="width: 695px; height: 601px;" alt="" src="PicturesEn/FileOptions.PNG"><br><br>However, for each specific file, the properties can be changed by calling the form with the <span style="font-weight: bold;">Local Options</span>
+button. This form follows the form for setting common properties. Any
+of the properties can be changed here and will be valid only for the
+selected file.<br><br><img style="width: 520px; height: 515px;" alt="" src="PicturesEn/LocalOptionsForm.PNG"><br><br>The
+figure shows a list of file types, which is not necessarily present in
+the application initially, but&nbsp;some types already provided in it.<br>To add and define a new file type:<br><ul><li>click the <span style="font-weight: bold;">Add</span> button.</li><li>in the window that appears, type the name of the file type you like and the extension corresponding to it, for example, xls.</li></ul>If several file types should be processed in the same way, then file extensions should be listed separated by a <span style="font-weight: bold;">space, comma or semicolon</span>, as shown in the figure (a space is shown).<br><img style="width: 555px; height: 123px;" alt="" src="PicturesEn/DefineExtesion.PNG"><br>For the selected extension, the form fields will contain the suggested values.<br><img style="width: 695px; height: 601px;" alt="" src="PicturesEn/DefineExtesionXLS.PNG"><br>For
+each type of file, one to four processing methods can be defined, the
+numbers of which are contained in the drop-down list of the field<br>Op # [<span style="font-weight: bold;">Index</span>].<br><p>The default method is index 1 and the name <span style="font-weight: bold;">Open</span>, which can be changed in the <span style="font-weight: bold;">Name</span> field.</p>All operations are ordered and the position of each operation in the list is important.<br><p>If definitions of operations have already been created, then with the <span style="font-weight: bold;">ReOrder</span> button you can assign any operation to another number (swap).</p><p>Deleting the name of an operation leads to release of a place in the list.</p>If
+the file of this type is to be processed in the standard way according
+to the association established in the Windows system, then the Invoke
+with Windows Association flag should be checked (which is offered by
+default).<p>The following three flags have the following assignments:</p><ul><li><span style="font-weight: bold;">Default Command (Mouse Double Click)</span> - if the flag is set, then the operation with the index, which is set in the [<span style="font-weight: bold;">Index</span>] field will be invoked by double-clicking (or <span style="font-weight: bold;">Enter</span>)
+on the file in the workspace file list. Only one of the four operations
+can have this flag set. Attempting to set this flag for another
+operation will trigger a warning and require confirmation.</li><li><span style="font-weight: bold;">Partcipate in All</span> - if the flag is set, then the operation with the index set in the [<span style="font-weight: bold;">Index</span>]
+field will be performed for files of this type, if a group operation
+with this index is activated for the list of files. Otherwise, the
+operation will not be activated.</li><li><span style="font-weight: bold;">Check Status</span>
+- if this flag is set, then during the group operation the current
+state of the file is checked. If in the past the operation on the file
+of this type was successful (state <span style="font-weight: bold;">Done</span>), then the operation is not performed again. Which of the four operations resulted in a <span style="font-weight: bold;">Done</span> state is not considered.</li></ul>If the <span style="font-weight: bold;">Invoke with Windows Association</span> flag is turned off, then the operation description is used, set in the form.<br><p>The <span style="font-weight: bold;">Perform at Frontend Side</span> flag determines in which context the operation is performed. By default, all operations are performed in the context of <span style="font-weight: bold;">BackEnd</span>. For the Mono-application, the execution context does not change anything in the behavior, and&nbsp;if the <span style="font-weight: bold;">FrontEnd</span> and the <span style="font-weight: bold;">BackEnd</span>
+are located on different computers, then the context must provide the
+appropriate behavior (for the time being is not supported).</p>The basis is the command structure defined in the <span style="font-weight: bold;">Format Command</span> field.<br>The command is constructed by selecting the possible elements from the drop-down list using the "&lt;&lt;" button.<br>The elements of the list are:<br><ul><li><span style="font-weight: bold;">Browse</span> ... - calls the file dialog and adds the selected file to the format line;</li><li>[<span style="font-weight: bold;">Application</span>] - indicates the value of the <span style="font-weight: bold;">Application</span> field (the field below the <span style="font-weight: bold;">Format Command</span> field);</li><li>[<span style="font-weight: bold;">Argument</span>] - indicates the value of the <span style="font-weight: bold;">Arguments</span> field (the field below the <span style="font-weight: bold;">Application</span> field);</li><li>[<span style="font-weight: bold;">Suffix</span>] - indicates the value of the <span style="font-weight: bold;">Suffix</span> field (the field below the <span style="font-weight: bold;">Arguments</span> field);</li><li><span style="font-weight: bold;">$(SourceFile)</span>
+- the full name of the file from the list of the workspace to be
+processed (in some cases, if the route to the directory contains
+spaces, you may need to enclose <span style="font-weight: bold;">$(SourceFile)</span> in quotes);</li><li><span style="font-weight: bold;">$(SourceName)</span> - file name only;</li><li><span style="font-weight: bold;">$(ExeName)</span> - the name of the executable file;</li><li><span style="font-weight: bold;">$(SourceExeDir)</span> - directory in which the executable file is located.</li></ul>The last two positions require clarification.<br><p>The
+concept of "executable file" and "directory of the location of the
+executable file" - entities related to the nature of the file of the
+workspace. So, with reference to a project file with the <span style="font-weight: bold;">.vipprj</span> extension of the <span style="font-weight: bold;">Visual Prolog</span> system, the executable file is the file generated by the project itself in the directory defined in the project itself. The <span style="font-weight: bold;">WorkSpace Manager</span>
+application does not "know" anything about what and where the
+executable file is created. But to run this executable file from the <span style="font-weight: bold;">WorkSpace Manage</span>r
+application, such information is necessary. For another similar
+"project" file, during its processing, the location and name of the
+generated executable file are determined by their own rules.</p>Therefore, the <span style="font-weight: bold;">WorkSpace Manager</span>
+application provides the ability to connect components (plugins) that "know" how
+to determine the location and name of the executable file from the
+contents of the project file. The application accesses the component
+whose name is specified in the <span style="font-weight: bold;">FileType Expert</span>
+field, and this component (plugin), as a result of analyzing the project file,
+returns the desired location and name of the executable file.<br><br>In the current version, the component&#8217;s <span style="font-weight: bold;">WorkSpace Manager</span> application for the <span style="font-weight: bold;">Visual Prolog</span> system is embedded. A component for any other similar project should be developed and connected to the <span style="font-weight: bold;">WorkSpace Manager</span> application (not supported in the current version).<br><br>The <span style="font-weight: bold;">WorkSpaceManager</span>
+application for each file type can assign properties to the input and
+output streams. For an input stream, this only applies to executable
+applications (for example, .exe, .cmd).<br><br>The output stream is processed if the <span style="font-weight: bold;">Handle Stream</span> flag is set. At the same time, the settings are:<br><p>The <span style="font-weight: bold;">Handle Output Stream</span>
+flag refers only to console applications, that is, applications that
+output their messages to the console. Applications using the window
+system are not affected by this flag.</p><ul><li><span style="font-weight: bold;">KeyWords</span>
+- a list of keywords that are used to determine the success or failure
+of processing a file by their appearance in the output stream.</li><li><span style="font-weight: bold;">Coding</span> - the expected encoding of the characters of the output stream.</li></ul>For the input stream can be set the full file name (selected by the <span style="font-weight: bold;">Browse</span>
+button), the contents of which can be transferred to the input stream
+of the executable application and the character encoding of the input
+stream (the <span style="font-weight: bold;">Coding</span> field).<br><p>The following are the figures for the four processing operations of the <span style="font-weight: bold;">Visual Prolog</span> system project file:</p><ul><li><span style="font-weight: bold;">Edit</span> - calls the project for editing, that is, calls the <span style="font-weight: bold;">Visual Prolog</span> programming system (<span style="font-weight: bold;">Vip.exe</span>), which opens the project file and then works independently of the <span style="font-weight: bold;">WorkSpace Manager</span> application;</li><li><span style="font-weight: bold;">Build</span> - calls the program <span style="font-weight: bold;">VipBuilder.exe</span>,
+which builds an executable application based on the project file. In
+this case, only files that have been modified since the last build are
+compiled;</li><li><span style="font-weight: bold;">Rebuild</span> - removes all traces of previous compilations and causes the complete construction of the executable application;</li><li><span style="font-weight: bold;">RunExe</span> - calls into execution an application built as a result of performing a <span style="font-weight: bold;">Build</span> or <span style="font-weight: bold;">Rebuild</span> operation.</li></ul><img style="width: 695px; height: 601px;" alt="" src="PicturesEn/VipEdit.PNG"><br><img style="width: 695px; height: 601px;" alt="" src="PicturesEn/VipBuild.PNG"><br><br><img style="width: 695px; height: 601px;" alt="" src="PicturesEn/VipReBuild.PNG"><br><br><img style="width: 695px; height: 601px;" alt="" src="PicturesEn/VipRunExe.PNG"></body></html>
