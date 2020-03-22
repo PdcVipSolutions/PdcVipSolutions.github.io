@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-us"><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>IntoductionEn</title><meta content="Victor Yukhtenko" name="author"></head>
+<body><small style="color: rgb(0, 0, 0); font-family: &quot;Times New Roman&quot;; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px;"><small>Copyright (c) Prolog Developemnt Center SPb</small></small><span style="color: rgb(0, 0, 0); font-family: &quot;Times New Roman&quot;; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span>&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: &quot;Times New Roman&quot;; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px;"><small style="color: rgb(0, 0, 0); font-family: &quot;Times New Roman&quot;; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px;"><small>WorkSpace Manager&nbsp;<br>Version 2.0</small></small><br><h2>Introduction</h2><h3>Motivation</h3>The
+idea of &#8203;&#8203;developing the WorkSpaceManager application came about when
+trying to use the SolutionManager application, which is part of the
+professional version of Visual Prolog from PDC.<br><br>The need for its
+use was due to the fact that several interdependent projects were at
+work at the same time, which had to be jointly compiled, launched for
+execution. Especially strained the situation of using the Visual Prolog
+system directly "from the pen of" its developers, when it was necessary
+to compile all the many projects (there were about 50, including
+various small examples and tests)<br><br>Not satisfied with a few points:<br><ul><li>&nbsp;&nbsp;&nbsp;&nbsp;work
+only with projects of the Visual Prolog system, while it was required
+to use different batch files or even different editors;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;it was impossible to change the order of processing projects;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;the impossibility of grouping projects;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;adding
+projects from one directory did not allow excluding some of them from
+consideration and again changing the order of their processing;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;the inability to use relative addressing of projects in the disk space.</li></ul>At the same time, we were interested in topics:<br><ul><li>&nbsp;&nbsp;&nbsp;&nbsp;Strict separation of the logical part of the application and its user interface;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Microservices;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Using the concept of plug-ins in applications;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;The
+ability to create remote services to create and compile Visual Prolog
+projects (the idea was once discussed by Leo Schou-Jensen and Thomas
+Puls).</li></ul><br>Therefore, in the project WorkSpaceManager (WSM),
+our needs and our architectural searches came together in relation to
+Visual Prolog-based applications.<br><br>The project before the first
+working version was developed by V. Yukhtenko (Prolog Development
+Center SPb), later Boris Belov took part in the work. Andrei Basukinsky
+assisted in solving the http interaction tasks.<br><h2>Functionality</h2><h3>File</h3>The basic unit of processing in WSM is a file whose extension determines its type.<br><br>Four
+types of operations "Op1", "Op2", "Op3", "Op4" can be performed on a
+file of each type. The nature of each of the operations as applied to a
+file of a particular type is not fixed and is determined by the user.<br>In general, each operation looks like a command line on MSWindows<br><br><span style="font-weight: bold;">&lt;executable&gt; &lt;prefix&gt; &lt;resource&gt; &lt;suffix&gt;</span><br><br>So for the operation "Build" (Build) of the project file <span style="font-weight: bold;">test.vipprj</span> of the Visual Prolog system it looks like this (up to routes):<br><br><span style="font-weight: bold;">vipBuilder.exe /build test.vipprj</span><br><br>What causes the construction of the<span style="font-weight: bold;"> test.vipprj</span> project and the creation of the executable application <span style="font-weight: bold;">test.exe</span> in the directory established by the project.<br><br>However, for processing any type of file, an application can be selected, by association, installed in the Windows system.<br><h3>WorkSpace</h3>WorkSpace
+(Workspace) contains many files that are relevant to the user. The user
+adds and deletes files from the workspace as needed.<br><br>WSM allows
+you to structure multiple files, grouped by user-defined criteria. The
+structure is represented as a tree and is not a file system mapping.<br><br>The WorkSpace structure and file processing results are saved in a file with the <span style="font-weight: bold;">.wsm</span> extension in XML format.<br><br>The general view of the application is shown in the following figure:<br><img style="width: 1076px; height: 571px;" alt="" src="PicturesEn/WSM_GeneralView.png"><br><h3><span style="font-weight: bold;"></span>File List and Tree</h3>The main working space of the user is the list of files located in the right part of the form.<br>The
+file name, the route to it, the processing status, the number of errors
+and warnings during the processing and the time of the last processing
+are indicated here.<br><br>There are four states of processing result:<br><ul><li>&nbsp;&nbsp;&nbsp;&nbsp;Done - completed successfully</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Failed - failed</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Not Found - File not found</li></ul>Each
+of the files can be performed one of the four described operations
+(Op1, Op2, Op3, Op4), valid for files of the appropriate type.<br>One
+of these operations can also be performed on each file of the selected
+(marked) list. Operations are performed in order of priority from top
+to bottom.<br><p>The tree in the left part of the form is a logical
+representation of the user about his work space. Initially, the tree
+contains only one node - the root, and all resources of the right part
+(if any) belong to this node. The user can create an arbitrary tree
+structure.</p>There are two types of tree nodes - <span style="font-weight: bold;">group</span> and <span style="font-weight: bold;">folder</span>.<br>A <span style="font-weight: bold;">group</span>
+can contain subgroups and it can belong to an arbitrary number of
+files. The group provides operations for adding, deleting files and
+moving them.<br>The <span style="font-weight: bold;">folder</span>
+corresponds to the directory of disk space and contains only those
+files whose types are defined in WSM, and which are contained in the
+directory and its subdirectories.<br>Folder cannot contain groups. The
+user can move files of&nbsp;a folder and (conditionally) delete them.
+Deleted files remain visible and change only the display brightness on
+the screen. The user can return the file to the active state.<br><br>In
+the right part of the form, all files of the group selected on the left
+are displayed, including all files of all subgroups and folders. This
+allows you to perform operations either on all the files in the
+workspace, or only on the part currently in focus of the user.<br><br>Drag-and-drop
+operations can be performed on the file list and on the tree, which
+allows you to quickly rearrange priorities and processing strategies.
+Moving with the keyboard is also possible.<br><h3>WSM variables</h3>The
+user can use both absolute and relative addressing of files in the disk
+space. Relative addressing is similar to that used in the Visual Prolog
+system. A named path is defined. The path name is used as a prefix in
+the file path. This named route here is called a <span style="font-weight: bold;">WSM-variable</span>.<br><br>Relative addressing allows you to move the workspace from one computer to another, overriding only the values &#8203;&#8203;of <span style="font-weight: bold;">WSM-variables</span>.<br><br>The
+user can define an unlimited number of WSM-variables and edit their
+value. The following figure shows the WSM-variable editor.<br><img style="width: 695px; height: 528px;" alt="" src="PicturesEn/wsm_VariablesDemo.PNG"><br><h3>Language</h3>The user interface language can be localized in relation to user preferences.<br>The
+language setting file LanguageWSM.xml is located (and should always be
+located there) in the directory of the executable file.<br><br>The base
+interface language is English, but most form labels, dialogs, and
+messages can be reassigned by editing the LanguageWSM.xml file.<br>Switching the user interface language is located in the Misc section of the WorkSpace Settings dialog.<br><h2>Architecture</h2>From
+the very beginning of its development, the architecture of the
+application was focused on the strict separation of the user interface
+from the logical part of the application, based on the subsequent use
+of microservice technology.<br>Therefore, the first implementation of the application immediately provided its separation into <span style="font-weight: bold;">FrontEnd</span> and <span style="font-weight: bold;">BackEnd</span>.<br><br>The structure of the mono application is shown in the following figure.<br><img style="width: 640px; height: 480px;" alt="" src="PicturesEn/WSM_mono.png"><br><br>Here
+the blue arrows show the links inside BackEnd and FrontEnd,
+respectively, and the red arrows indicate the organization of the
+connection between BackEnd and FrontEnd.<br><br>Inside these
+structures, modules access other modules through the BE (FE)
+-Connector, which accesses the object registry (Entity Registry).<br><br>Events
+initiated by the opposite side are processed by the BE (FE) Messages
+module, which invokes the corresponding predicates of the BE (FE) Tasks
+module. That, in turn, refers to the other modules BackEnd (FrontEnd).
+After receiving data for the opposite side, the BE (FE) Tasks module
+sends a message through the BE (FE) Event module. The opposite page
+subscribes to data source events for it.<br><br>The initiator of the data exchange is always FrontEnd, which initiates the execution of tasks in BackEnd.<br><br>Work
+happens in asynchronous mode: sending a request, FrontEnd returns to
+its work. BackEnd, after receiving the request, performs the task and,
+possibly, initiates the transfer of data in FrontEnd. This can be
+either a single message or a sequence of messages that must be
+processed in FrontEnd.<br><br>This structure of the application made it
+possible to switch to the option of separate applications (BackEnd and
+FrontEnd), which interact via the HTTP protocol, without any serious
+consequences, by adding and enabling the Http-Server and Http-Client to
+work.<br><br>The structure of such an application is shown in the following figure.<br><img style="width: 640px; height: 731px;" alt="" src="PicturesEn/WSM_CS.png"><br>Client and Server themselves convert data and organize their transfer between BackEnd and FrontEnd.<br><h2>Technology</h2>When developing WSM, PDC VIP v.9 technologies were used, proprietary technologies and techniques:<br><ul><li>&nbsp;&nbsp;&nbsp;&nbsp;Registration of objects in shared memory;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Organization of data storage in XML format;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Data exchange based on events (Event Messaging) in the format namedValueList;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Organization of space forms based on the split Screen;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Organization of management based on the ribbon-panel;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Client-server architecture;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Data exchange via http protocol;</li><li>&nbsp;&nbsp;&nbsp;&nbsp;Data exchange in Json format (when working on the http protocol);</li><li>&nbsp;&nbsp;&nbsp;&nbsp;The use of message queues in a multithreaded environment (when working on the HTTP protocol).</li></ul><h2>Application design structure</h2>The structure of the mono application is shown below.<br><img style="width: 463px; height: 893px;" alt="" src="PicturesEn/WSM_MonoProject.png"><br><br>And here are the project structures for Http-FrontEnd and Http-BackEnd<br><br><img style="width: 462px; height: 758px;" alt="" src="PicturesEn/WSM_Http_FrontEnd.PNG"><br><img style="width: 461px; height: 660px;" alt="" src="PicturesEn/WSM_Http_BackEnd.PNG"><br><br class="Apple-interchange-newline"></body></html>
