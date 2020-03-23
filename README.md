@@ -1,6 +1,5 @@
-Copyright (c) Prolog Developemnt Center SPb
+Copyright (c) Prolog Development Center SPb
 
-PdcVipSolutions
+SpbRSolutions Version 3.0 info
 
-Version 3.0
 
