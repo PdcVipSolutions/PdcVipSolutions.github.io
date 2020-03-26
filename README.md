@@ -13,8 +13,11 @@ SpbRSolutions (the root directory may have any other name)
         WS_Manager  (corresponds to WS_Manager in GitHub)
     SpbVipTools (corresponds to SpbVipTools in GitHub)
         SpbVipTools is the set of packages to support projects and examples and to demonstrate how it works.
+
 Do not hesitate to ask via email victorYukhtenko@pdc.spb.su or victor.a.yukhtenko@gmail.com.
+
 Version 3.0
+
 The Version 3.0 content repeats version 2.0 and is extended by the Application Frame - a set of  project templates (also called AppFrame), which can serve as the basis for applications that 
 
     * have a client-server architecture in the form of FrontEnd and BackEnd, interacting either within a single mono-application or through HTTP
@@ -35,6 +38,7 @@ The directory SpbExamples\Febe contains the example of the created set of projec
 The best way to compile all projects is to use the WorkSpaceManager.exe application placed at SpbVipTools\Bin directory and use the workspace data SpbVipTools\UserWS\DemoWorspace.wsm
 
 Version 2.0
+
 The main purpose of version 2.0 is the demonstration of the WorkSpace Manager Tool.
 
 Version 2.0 contains the executables and source codes of applications.
